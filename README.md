@@ -9,3 +9,12 @@ To run the script, you need to provide the video filename, the interface where t
 	./stream.sh vide_filename interface channel_name
 	
 You can also set the port with the -p option.
+
+
+To stream a video, you need acces to the source.sh file from the PeerStreamer source. There are two ways to do it
+
+   - Download the source code and compile it. It is available at www.peerstreamer.org/content/development
+
+   - Copy the files in /opt/peerstreamer to a directory with read/write permissions to your user.
+
+Once you got the source.sh file, you just need to copy that directory to the directory where the stream.sh script is contained.
