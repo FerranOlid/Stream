@@ -2,19 +2,22 @@
 
 WKP=1023
 port=6666
+debug=0
 
 # Describes the script usage with its options
 function usage () {
 	echo "Usage: $0 [options] ... [Video] [Interface] [Channel_name]"
 	echo "  options: "
+	echo "  -d debug: activates debug extra commands"
 	echo "  -p port: port to stream the video. Default: 6666"
 	echo "  -h help"
 	exit $1
 }
 
 # Getting options (for the time being, just help and port)
-while getopts "p:" opt; do
+while getopts "p:d" opt; do
 	case $opt in
+		d ) debug=1 ;;
 		p )	port=$OPTARG
 			if [ "$OPTARG" -le "$WKP" ]
 			then
@@ -40,7 +43,8 @@ case $# in
 		;;
 esac
 
-# Getting video info to create channel file...
+# Getting video info to create channel file
+#-----------------------------------------------#
 
 # tmp is used to store audio info and is processed afterwards to get a few audio parameters
 tmp=`ffprobe $video 2>&1 | grep "Audio" | cut -d':' -f3-`
@@ -95,6 +99,12 @@ Channel $channel
 EOF
 
 # Tmp instructions, just to test & develop
-mv -f ./channel ps/channels.conf
-cd ps
-./source.sh -f $video -V libx264 -A mp2 -s "-I  $2"
+# Copies new channels to PS directory and executes de source
+case $debug in
+    0) exit 0 ;;
+	1)
+		[ $debug ] && mv -f ./channel ps/channels.conf
+		[ $debug ] && cd ps
+		[ $debug ] && ./source.sh -f $video -V libx264 -A mp2 -s "-I  $2"
+		;;
+esac
