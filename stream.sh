@@ -99,7 +99,7 @@ Channel $channel
 EOF
 
 # Tmp instructions, just to test & develop
-# Copies new channels to PS directory and executes de source
+# Copies new channels to PS directory and executes de source 
 case $debug in
     0) exit 0 ;;
 	1)
