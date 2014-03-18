@@ -2,6 +2,7 @@ Stream
 ======
 
 Automatization script for the PeerStreamer
+======
 
 To run this script, you need to install the PeerStreamer before. You can download it following the instructions in the following link: http://peerstreamer.org/content/download
 
